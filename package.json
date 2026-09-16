@@ -1,0 +1,17 @@
+{
+  "name": "telem4",
+  "version": "1.0.0",
+  "private": false,
+  "description": "LAN flight operations dashboard for FPV drone telemetry collection",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "qrcode": "^1.5.4"
+  }
+}

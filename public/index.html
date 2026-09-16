@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#171d3b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Telem2" />
+  <title>Telem2 · Flight Operations</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div><strong id="sessionBrandLabel">Session: —</strong><span>flight operations</span></div></div>
+      <div class="connection"><i id="connectionDot"></i><span id="connectionText">Connecting…</span></div>
+      <nav>
+        <button class="nav-link session-nav" data-view="live"><span>◉</span> LiveView</button>
+        <button class="nav-link session-nav" data-view="takeoff"><span>↑</span> Takeoff</button>
+        <button class="nav-link mobile-advanced-toggle" id="mobileAdvancedToggle" type="button"><span>＋</span> Advanced</button>
+        <button class="nav-link session-nav mobile-advanced-nav" data-view="pending"><span>↯</span> Pending flights</button>
+        <button class="nav-link session-nav setup-nav mobile-advanced-nav" data-view="setup"><span>⚙</span> Setup</button>
+        <button class="nav-link session-nav mobile-advanced-nav" data-view="planning"><span>▦</span> Planning</button>
+        <button class="nav-link session-nav mobile-advanced-nav" data-view="history"><span>⌁</span> History</button>
+        <button class="nav-link session-nav mobile-advanced-nav" data-view="remove"><span>×</span> Remove flights</button>
+        <button class="nav-link session-nav mobile-advanced-nav" data-view="audit"><span>≋</span> Audit log</button>
+        <button class="nav-link admin-nav mobile-advanced-nav" data-view="admin"><span>▤</span> Admin</button>
+      </nav>
+      <div class="session-timer-sidebar" id="sessionTimerBar"></div><div class="connected-users" id="connectedUsers"><div class="mini-label">CONNECTED USERS</div><div class="connected-users-list"></div></div><div class="sidebar-foot"><div class="mini-label">OPEN ON THIS NETWORK</div><div class="host-address" id="hostAddress">Loading address…</div><button class="connect-phone-button" data-action="show-qr" type="button">▣ Connect phone</button><p>Use the QR code on another PC, Android, or iPhone.</p></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div id="droneStatus" class="drone-status-list"><div class="drone-status drone-status-disconnected"><span class="drone-status-dot"></span><div><b>Drone: disconnected</b><small>No flight controller connected</small><em class="drone-status-meta"></em></div></div></div><div><div class="eyebrow" id="eyebrow">OPERATIONS CENTER</div><h1 id="pageTitle">Sessions</h1></div><div class="top-actions"><button class="ghost hidden" id="backSessions">← Sessions</button><button class="ghost" id="syncBtn">↥ Sync snapshot</button><a class="primary" href="/api/export.csv">↓ Export CSV</a></div></header>
+      <section id="toast" class="toast hidden"></section>
+      <section id="liveView" class="view active"></section>
+      <section id="takeoffView" class="view"></section>
+      <section id="pendingView" class="view"></section>
+      <section id="sdTransferView" class="view"></section>
+      <section id="setupView" class="view"></section>
+      <section id="planningView" class="view"></section>
+      <section id="historyView" class="view"></section>
+      <section id="removeView" class="view"></section>
+      <section id="auditView" class="view"></section>
+      <section id="adminView" class="view"></section>
+      <section id="flightDetailView" class="view"></section>
+    </main>
+  </div>
+  <div id="offlineOverlay" class="offline-overlay"><div class="offline-card"><div class="offline-icon">!</div><h2>Disconnected</h2><p>Telem2 is disconnected from the host. The dashboard is locked until the connection is restored.</p><span>Reconnecting automatically…</span></div></div>
+  <div id="successExit" class="success-exit hidden"><div><strong>Successful, exiting</strong><span>Flight saved successfully</span></div></div>
+  <div id="takeoffBatteryModal" class="takeoff-modal hidden"><div class="takeoff-modal-card"><div class="eyebrow">TAKEOFF CHECK</div><h2>Enter battery number</h2><p id="takeoffBatteryFlight"></p><div id="takeoffBatteryLast" class="takeoff-battery-last">Last used battery: Not recorded</div><input id="takeoffBatteryInput" placeholder="Battery number" inputmode="numeric" autocomplete="off"><div class="takeoff-modal-actions"><button type="button" class="ghost" data-action="cancel-takeoff">Cancel</button><button type="button" class="takeoff-button" data-action="confirm-takeoff">Took off</button></div></div></div>
+  <div id="qrModal" class="qr-modal hidden"><div class="qr-modal-card"><button class="qr-close" data-action="close-qr" type="button" aria-label="Close">×</button><div class="eyebrow">CONNECT PHONE</div><h2>Scan to open Telem2</h2><img src="/api/qr.png" alt="QR code to open Telem2 on this network"><strong id="qrLink">Loading address…</strong><p>Connect the phone to the same Wi‑Fi, then scan this code with its camera.</p></div></div>
+  <script src="/app.js"></script>
+</body>
+</html>
